@@ -14,7 +14,6 @@
             <div class="header-content">
                 <div class="brand">
                     <button class="menu-toggle" aria-label="Toggle Navigation">☰</button>
-                    <div class="logo-icon">📈</div>
                     <div class="logo-copy">
                         <span class="logo-title">S&P 500 Predictor</span>
                         <span class="logo-subtitle">AI Research Console</span>
@@ -49,56 +48,48 @@
             </div>
             <nav class="sidebar-nav">
                 <a href="{{ url_for('home') }}" class="sidebar-link {% if request.endpoint == 'home' %}active{% endif %}">
-                    <span class="icon">🏠</span>
                     <div>
                         <span class="link-text">Executive Home</span>
                         <span class="link-caption">Insights snapshot</span>
                     </div>
                 </a>
                 <a href="{{ url_for('data_overview') }}" class="sidebar-link {% if request.endpoint == 'data_overview' %}active{% endif %}">
-                    <span class="icon">📊</span>
                     <div>
                         <span class="link-text">Data Overview</span>
                         <span class="link-caption">Integrity & coverage</span>
                     </div>
                 </a>
                 <a href="{{ url_for('feature_engineering') }}" class="sidebar-link {% if request.endpoint == 'feature_engineering' %}active{% endif %}">
-                    <span class="icon">🔧</span>
                     <div>
                         <span class="link-text">Feature Lab</span>
                         <span class="link-caption">Signals & factors</span>
                     </div>
                 </a>
                 <a href="{{ url_for('training') }}" class="sidebar-link {% if request.endpoint == 'training' %}active{% endif %}">
-                    <span class="icon">🤖</span>
                     <div>
                         <span class="link-text">Model Training</span>
                         <span class="link-caption">Pipelines & tuning</span>
                     </div>
                 </a>
                 <a href="{{ url_for('predictions') }}" class="sidebar-link {% if request.endpoint == 'predictions' %}active{% endif %}">
-                    <span class="icon">📈</span>
                     <div>
                         <span class="link-text">Predictions</span>
                         <span class="link-caption">Live forecasting</span>
                     </div>
                 </a>
                 <a href="{{ url_for('import_summary') }}" class="sidebar-link {% if request.endpoint == 'import_summary' %}active{% endif %}">
-                    <span class="icon">📥</span>
                     <div>
                         <span class="link-text">Import Summary</span>
                         <span class="link-caption">Data ingestion status</span>
                     </div>
                 </a>
                 <a href="{{ url_for('query_mongodb') }}" class="sidebar-link {% if request.endpoint == 'query_mongodb' %}active{% endif %}">
-                    <span class="icon">🗄️</span>
                     <div>
                         <span class="link-text">Query MongoDB</span>
                         <span class="link-caption">NoSQL database queries</span>
                     </div>
                 </a>
                 <a href="{{ url_for('query_postgresql') }}" class="sidebar-link {% if request.endpoint == 'query_postgresql' %}active{% endif %}">
-                    <span class="icon">🗃️</span>
                     <div>
                         <span class="link-text">Query PostgreSQL</span>
                         <span class="link-caption">SQL database queries</span>

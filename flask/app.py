@@ -11,6 +11,9 @@ from psycopg2.extras import RealDictCursor
 
 app = Flask(__name__, template_folder='templates')
 
+# Enable template auto-reload for development
+app.config['TEMPLATES_AUTO_RELOAD'] = True
+
 # Database connections
 mongo_host = os.getenv('MONGO_HOST', 'localhost')
 mongo_port = os.getenv('MONGO_PORT', '37017')
