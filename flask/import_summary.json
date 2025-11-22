@@ -1,0 +1,24 @@
+{
+  "results": {
+    "sp500": {
+      "message": "Successfully imported 4019 records into sp500",
+      "inserted_ids": 4019
+    },
+    "depression_index": {
+      "message": "Successfully imported 332 records into depression_index",
+      "inserted_ids": 332
+    },
+    "rainfall": {
+      "message": "Successfully imported 4019 records into rainfall",
+      "inserted_ids": 4019
+    },
+    "ccnews_depression": {
+      "message": "Successfully imported 3928 records into ccnews_depression",
+      "inserted_ids": 3928
+    },
+    "stock_data": {
+      "message": "Successfully imported 2017538 records into stock_data",
+      "inserted_ids": 2017538
+    }
+  }
+}

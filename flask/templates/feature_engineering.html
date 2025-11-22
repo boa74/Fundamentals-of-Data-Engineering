@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Feature Engineering - Stock Prediction{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>🔧 Feature Engineering</h1>
+    <p>Build and analyze predictive features from raw data.</p>
+</div>
+
+<div class="content-section">
+    <h2>Available Features</h2>
+    <ul class="feature-list">
+        <li><strong>Price Features:</strong> Open, High, Low, Close, Volume</li>
+        <li><strong>Technical Indicators:</strong> Returns, 7-day Volatility</li>
+        <li><strong>Sentiment:</strong> Depression Index (Google Trends)</li>
+        <li><strong>Environmental:</strong> Rainfall patterns by state</li>
+        <li><strong>Derived Features:</strong> Moving averages, momentum indicators (to be implemented)</li>
+    </ul>
+</div>
+{% endblock %}

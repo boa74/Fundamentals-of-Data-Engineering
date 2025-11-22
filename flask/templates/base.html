@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}S&P 500 Stock Prediction Platform{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Header -->
+        <header class="top-header">
+            <div class="header-content">
+                <div class="brand">
+                    <button class="menu-toggle" aria-label="Toggle Navigation">☰</button>
+                    <div class="logo-icon">📈</div>
+                    <div class="logo-copy">
+                        <span class="logo-title">S&P 500 Predictor</span>
+                        <span class="logo-subtitle">AI Research Console</span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <form class="global-search" role="search">
+                        <input type="search" placeholder="Search datasets, models, trades" aria-label="Search">
+                        <span class="kbd">⌘K</span>
+                    </form>
+                    <nav class="header-nav">
+                        <a href="#" class="nav-link">Docs</a>
+                        <a href="#" class="nav-link">Support</a>
+                        <button class="pill-btn">New Analysis</button>
+                    </nav>
+                    <div class="user-profile">
+                        <button class="icon-btn" aria-label="Notifications">🔔</button>
+                        <div class="avatar">JD</div>
+                        <div class="user-meta">
+                            <span class="username">John Doe</span>
+                            <span class="user-role">Chief Analyst</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <span class="menu-label">Overview</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="{{ url_for('home') }}" class="sidebar-link {% if request.endpoint == 'home' %}active{% endif %}">
+                    <span class="icon">🏠</span>
+                    <div>
+                        <span class="link-text">Executive Home</span>
+                        <span class="link-caption">Insights snapshot</span>
+                    </div>
+                </a>
+                <a href="{{ url_for('data_overview') }}" class="sidebar-link {% if request.endpoint == 'data_overview' %}active{% endif %}">
+                    <span class="icon">📊</span>
+                    <div>
+                        <span class="link-text">Data Overview</span>
+                        <span class="link-caption">Integrity & coverage</span>
+                    </div>
+                </a>
+                <a href="{{ url_for('feature_engineering') }}" class="sidebar-link {% if request.endpoint == 'feature_engineering' %}active{% endif %}">
+                    <span class="icon">🔧</span>
+                    <div>
+                        <span class="link-text">Feature Lab</span>
+                        <span class="link-caption">Signals & factors</span>
+                    </div>
+                </a>
+                <a href="{{ url_for('training') }}" class="sidebar-link {% if request.endpoint == 'training' %}active{% endif %}">
+                    <span class="icon">🤖</span>
+                    <div>
+                        <span class="link-text">Model Training</span>
+                        <span class="link-caption">Pipelines & tuning</span>
+                    </div>
+                </a>
+                <a href="{{ url_for('predictions') }}" class="sidebar-link {% if request.endpoint == 'predictions' %}active{% endif %}">
+                    <span class="icon">📈</span>
+                    <div>
+                        <span class="link-text">Predictions</span>
+                        <span class="link-caption">Live forecasting</span>
+                    </div>
+                </a>
+                <a href="{{ url_for('import_summary') }}" class="sidebar-link {% if request.endpoint == 'import_summary' %}active{% endif %}">
+                    <span class="icon">📥</span>
+                    <div>
+                        <span class="link-text">Import Summary</span>
+                        <span class="link-caption">Data ingestion status</span>
+                    </div>
+                </a>
+                <a href="{{ url_for('query_mongodb') }}" class="sidebar-link {% if request.endpoint == 'query_mongodb' %}active{% endif %}">
+                    <span class="icon">🗄️</span>
+                    <div>
+                        <span class="link-text">Query MongoDB</span>
+                        <span class="link-caption">NoSQL database queries</span>
+                    </div>
+                </a>
+                <a href="{{ url_for('query_postgresql') }}" class="sidebar-link {% if request.endpoint == 'query_postgresql' %}active{% endif %}">
+                    <span class="icon">🗃️</span>
+                    <div>
+                        <span class="link-text">Query PostgreSQL</span>
+                        <span class="link-caption">SQL database queries</span>
+                    </div>
+                </a>
+            </nav>
+
+
+            <div class="sidebar-cta">
+                <p>Deploy next-gen LLM research copilots to your desk.</p>
+                <button class="btn btn-primary btn-block">Upgrade Workspace</button>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="version-info">Platform v1.0.0 · Build 1025</div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            {% block content %}{% endblock %}
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <p>&copy; 2025 S&P 500 Predictor. All rights reserved.</p>
+                </div>
+                <div class="footer-right">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Support</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

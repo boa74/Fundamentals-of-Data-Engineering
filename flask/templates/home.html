@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}Home - S&P 500 Stock Prediction Platform{% endblock %}
+
+{% block content %}
+<div class="hero-container">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-content">
+        <div>
+            <h1 class="hero-title">S&P 500 Stock Prediction Platform</h1>
+            <p class="hero-description">
+                Advanced machine learning platform for stock market prediction and analysis.
+                Leverage multi-source data including market indicators, sentiment analysis, and environmental factors
+                to predict S&P 500 trends with state-of-the-art models.
+            </p>
+        </div>
+        <div class="metrics-grid">
+            {% for metric in metrics_data %}
+            <div class="stat-card">
+                <div class="metric-label">{{ metric.label }}</div>
+                <div class="metric-value">{{ metric.value }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <div class="kpi-strip">
+        <div class="kpi-card">
+            <span class="kpi-label">Market Breadth</span>
+            <p class="kpi-value">68%</p>
+            <span class="trend-up">+4.2% vs last week</span>
+        </div>
+        <div class="kpi-card">
+            <span class="kpi-label">Signal Uptime</span>
+            <p class="kpi-value">99.95%</p>
+            <span>12 regions monitored</span>
+        </div>
+        <div class="kpi-card">
+            <span class="kpi-label">Alpha Capture</span>
+            <p class="kpi-value">1.7 bps</p>
+            <span class="trend-up">↑ outperforming benchmark</span>
+        </div>
+        <div class="kpi-card">
+            <span class="kpi-label">Risk Budget</span>
+            <p class="kpi-value">54%</p>
+            <span class="trend-down">Remaining allocation</span>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <div class="nav-grid">
+        {% for card in navigation_cards %}
+        <div class="nav-card">
+            <h4 class="nav-title">{{ card.title }}</h4>
+            <p class="nav-desc">{{ card.description }}</p>
+            <a href="{{ card.url }}" class="btn btn-primary">{{ card.button }}</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>Execution Highlights</h2>
+    <div class="insights-grid">
+        <div class="insight-card">
+            <h4>Macro Desk</h4>
+            <p>US PMI surprise added +0.6% to weekly forecast confidence.</p>
+        </div>
+        <div class="insight-card">
+            <h4>Sentiment Blend</h4>
+            <p>Depression index trending down for 6 consecutive weeks, easing risk premium.</p>
+        </div>
+        <div class="insight-card">
+            <h4>Climate Overlay</h4>
+            <p>Rainfall anomalies in 12 states correlated with consumer staples lift.</p>
+        </div>
+        <div class="insight-card">
+            <h4>Volatility Desk</h4>
+            <p>7-day realized vol compressed to 13.2; hedges auto-adjusted.</p>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <div class="dual-grid">
+        <div>
+            <h3>Live Operations</h3>
+            <div class="activity-feed">
+                <div class="activity-row">
+                    <span>📡 LSTM training cycle completed</span>
+                    <span class="trend-up">MAE ↓ 3.4%</span>
+                </div>
+                <div class="activity-row">
+                    <span>🛰️ Data pipeline sync</span>
+                    <span>3 sources refreshed</span>
+                </div>
+                <div class="activity-row">
+                    <span>🛡️ Risk threshold alert</span>
+                    <span class="trend-down">Handled automatically</span>
+                </div>
+                <div class="activity-row">
+                    <span>📊 New dashboard published</span>
+                    <span>Feature Lab</span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h3>Active Playbooks</h3>
+            <div class="pill-list">
+                <span class="pill">Momentum Neutral</span>
+                <span class="pill">Macro Regime 3</span>
+                <span class="pill">Short Vol Hedge</span>
+                <span class="pill">Climate Overlay</span>
+                <span class="pill">Sentiment Divergence</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -51,9 +51,7 @@ services:
       - POSTGRES_PORT=5432
       - DATABASE_URL=postgresql://admin:PassW0rd@apan5400-postgres:5432/db
       - MONGO_HOST=apan5400-mongodb
-      - MONGO_PORT=37017
-      - MONGO_USER=admin
-      - MONGO_PASSWORD=PassW0rd
+      - MONGO_PORT=27017
       - MONGO_DB=db
     ports:
       - 58503:18502
@@ -80,13 +78,10 @@ services:
     container_name: apan5400-mongodb
     image: mongo:latest
     ports:
-      - 37017:37017
+      - 37017:27017
     volumes:
       - mongodb_data:/data/db
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: PassW0rd
-      MONGO_INITDB_DATABASE: db
+    # Removed auth for simplicity
     networks:
       - apan5400-net
 

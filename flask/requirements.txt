@@ -18,6 +18,11 @@ joblib
 
 #“unstructured[md,pdf,pptx]”
 unstructured-client
+
+# For MongoDB and FastAPI
+pymongo
+fastapi
+uvicorn[standard]
 unstructured
 unstructured-inference
 unstructured.pytesseract

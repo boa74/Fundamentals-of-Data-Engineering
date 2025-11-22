@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}Query PostgreSQL - S&P 500 Stock Prediction Platform{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>PostgreSQL Query Interface</h1>
+    <p>Execute SQL queries on your PostgreSQL database</p>
+</div>
+
+<div class="content-section">
+    <h2>SQL Query Form</h2>
+    <form method="POST" class="query-form">
+        <div style="margin-bottom: 1rem;">
+            <label for="query" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">SQL Query:</label>
+            <textarea name="query" id="query" rows="6" placeholder="SELECT * FROM your_table LIMIT 10;" required style="width: 100%; padding: 0.5rem; border: 1px solid var(--border); border-radius: 6px; font-family: monospace;"></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Execute Query</button>
+    </form>
+</div>
+
+{% if error %}
+<div class="content-section" style="border-left-color: var(--danger);">
+    <h2 style="color: var(--danger);">Error</h2>
+    <p>{{ error }}</p>
+</div>
+{% endif %}
+
+{% if results %}
+<div class="content-section">
+    <h2>Query Results ({{ results|length }} rows)</h2>
+    
+    {% if results %}
+        <div style="overflow-x: auto; margin-top: 1rem;">
+            <table style="width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: 8px;">
+                <thead>
+                    <tr style="background: var(--light);">
+                        {% for column in columns %}
+                        <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border); font-weight: 600;">{{ column }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in results %}
+                    <tr style="border-bottom: 1px solid var(--border);">
+                        {% for column in columns %}
+                        <td style="padding: 0.75rem; border-right: 1px solid var(--border);">
+                            {{ row[column] }}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+</div>
+
+<div class="content-section">
+    <h2>Raw Results</h2>
+    <pre style="background: #f8f9fa; padding: 1rem; border-radius: 8px; overflow-x: auto; max-height: 400px; overflow-y: auto;">{{ results|tojson(indent=2) }}</pre>
+</div>
+{% endif %}
+
+<div class="content-section">
+    <h2>Available Tables</h2>
+    <p>Common tables in your PostgreSQL database:</p>
+    <div class="pill-list">
+        <span class="pill">users</span>
+        <span class="pill">sessions</span>
+        <span class="pill">logs</span>
+        <span class="pill">configurations</span>
+    </div>
+    
+    <div class="info-box" style="margin-top: 1rem;">
+        <h3>Sample Queries</h3>
+        <ul>
+            <li><strong>List all tables:</strong> <code>SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';</code></li>
+            <li><strong>Show table structure:</strong> <code>SELECT column_name, data_type FROM information_schema.columns WHERE table_name = 'your_table';</code></li>
+            <li><strong>Count records:</strong> <code>SELECT COUNT(*) FROM your_table;</code></li>
+            <li><strong>Sample data:</strong> <code>SELECT * FROM your_table LIMIT 5;</code></li>
+        </ul>
+        <p><strong>Note:</strong> Only SELECT queries are allowed for security reasons.</p>
+    </div>
+</div>
+{% endblock %}

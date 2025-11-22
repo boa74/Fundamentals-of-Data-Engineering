@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Import Summary - S&P 500 Stock Prediction Platform{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Dataset Import Summary</h1>
+    <p>Overview of imported datasets into MongoDB</p>
+</div>
+
+<div class="content-section">
+    <h2>Import Results</h2>
+    
+    {% if summary.results %}
+        <div class="stat-grid">
+            {% for dataset, result in summary.results.items() %}
+                <div class="stat-card">
+                    <div class="stat-label">{{ dataset|replace('_', ' ')|title }}</div>
+                    {% if result.message %}
+                        <div class="stat-value">{{ result.inserted_ids }}</div>
+                        <p style="color: #27ae60; margin: 0.5rem 0 0 0;">{{ result.message }}</p>
+                    {% else %}
+                        <div class="stat-value" style="color: #e74c3c;">Error</div>
+                        <p style="color: #e74c3c; margin: 0.5rem 0 0 0;">{{ result.error }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        
+        <div class="info-box">
+            <h3>Summary</h3>
+            <ul>
+                <li><strong>Total Datasets:</strong> {{ summary.results|length }}</li>
+                <li><strong>Successful Imports:</strong> {{ summary.results|selectattr('message')|list|length }}</li>
+                <li><strong>Failed Imports:</strong> {{ summary.results|rejectattr('message')|list|length }}</li>
+            </ul>
+        </div>
+    {% else %}
+        <p>No import results found.</p>
+    {% endif %}
+</div>
+
+<div class="content-section">
+    <h2>Raw JSON Data</h2>
+    <pre style="background: #f8f9fa; padding: 1rem; border-radius: 8px; overflow-x: auto;">{{ summary|tojson(indent=2) }}</pre>
+</div>
+{% endblock %}

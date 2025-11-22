@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}Query MongoDB - S&P 500 Stock Prediction Platform{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>MongoDB Query Interface</h1>
+    <p>Query your imported datasets in MongoDB</p>
+</div>
+
+<div class="content-section">
+    <h2>Query Form</h2>
+    <form method="POST" class="query-form">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+            <div>
+                <label for="collection" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Collection:</label>
+                <select name="collection" id="collection" required style="width: 100%; padding: 0.5rem; border: 1px solid var(--border); border-radius: 6px;">
+                    <option value="">Select a collection...</option>
+                    {% for collection in collections %}
+                    <option value="{{ collection }}">{{ collection }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label for="limit" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Limit Results:</label>
+                <input type="number" name="limit" id="limit" value="10" min="1" max="1000" style="width: 100%; padding: 0.5rem; border: 1px solid var(--border); border-radius: 6px;">
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 1rem;">
+            <label for="query" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Query (JSON format):</label>
+            <textarea name="query" id="query" rows="4" placeholder='{}' style="width: 100%; padding: 0.5rem; border: 1px solid var(--border); border-radius: 6px; font-family: monospace;">{}</textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Execute Query</button>
+    </form>
+</div>
+
+{% if error %}
+<div class="content-section" style="border-left-color: var(--danger);">
+    <h2 style="color: var(--danger);">Error</h2>
+    <p>{{ error }}</p>
+</div>
+{% endif %}
+
+{% if results %}
+<div class="content-section">
+    <h2>Query Results ({{ results|length }} documents)</h2>
+    
+    {% if results %}
+        <div style="overflow-x: auto; margin-top: 1rem;">
+            <table style="width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: 8px;">
+                <thead>
+                    <tr style="background: var(--light);">
+                        {% for key in results[0].keys() %}
+                        <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border); font-weight: 600;">{{ key }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for doc in results %}
+                    <tr style="border-bottom: 1px solid var(--border);">
+                        {% for key, value in doc.items() %}
+                        <td style="padding: 0.75rem; border-right: 1px solid var(--border);">
+                            {% if value is string %}
+                                {{ value }}
+                            {% elif value is number %}
+                                {{ value }}
+                            {% elif value is iterable and value is not string %}
+                                {{ value|list }}
+                            {% else %}
+                                {{ value }}
+                            {% endif %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+</div>
+
+<div class="content-section">
+    <h2>Raw JSON Results</h2>
+    <pre style="background: #f8f9fa; padding: 1rem; border-radius: 8px; overflow-x: auto; max-height: 400px; overflow-y: auto;">{{ results|tojson(indent=2) }}</pre>
+</div>
+{% endif %}
+
+<div class="content-section">
+    <h2>Available Collections</h2>
+    <div class="pill-list">
+        {% for collection in collections %}
+        <span class="pill">{{ collection }}</span>
+        {% endfor %}
+    </div>
+    
+    <div class="info-box" style="margin-top: 1rem;">
+        <h3>Query Examples</h3>
+        <ul>
+            <li><strong>Find all documents:</strong> <code>{}</code></li>
+            <li><strong>Limit results:</strong> <code>{"$limit": 5}</code></li>
+            <li><strong>Find by field:</strong> <code>{"Close_^GSPC": {"$gt": 3000}}</code></li>
+            <li><strong>Sort results:</strong> <code>{"$sort": {"Date": -1}}</code></li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
