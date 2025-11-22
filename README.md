@@ -48,12 +48,22 @@ Fundamentals-of-Data-Engineering/
 ├── 📄 README.md                          # Main project documentation (comprehensive)
 ├── 📄 docker-compose.yml                 # Docker orchestration
 │
+├── 📁 api/                               # FastAPI backend service ⭐
+│   ├── 📄 main.py                        # FastAPI application
+│   ├── 📄 requirements.txt              # API dependencies
+│   ├── 📄 Dockerfile                    # API container config
+│   ├── 📄 README.md                     # API documentation
+│   ├── 📁 routers/                      # API route handlers
+│   │   ├── mongodb.py                   # MongoDB API endpoints
+│   │   └── postgresql.py                # PostgreSQL API endpoints
+│   └── 📁 dataset/                      # API data access
+│
 ├── 📁 dataset/                           # Data files
 │   ├── sp500.csv                        # S&P 500 market data (4,021 rows)
 │   ├── depression_index.csv             # Google Trends data (334 rows)
 │   └── rainfall.csv                     # Weather data (4,021 rows)
 │
-├── 📁 flask/                             # Web application
+├── 📁 flask/                             # Flask web application
 │   ├── 📄 app.py                        # Main Flask application ⭐
 │   ├── 📄 requirements.txt              # Python dependencies
 │   ├── 📄 utils.py                      # Utility functions
@@ -111,14 +121,28 @@ Fundamentals-of-Data-Engineering/
 - Feature importance analysis
 - Historical accuracy tracking
 
+### 5. **Database Query Interfaces**
+- **MongoDB Query Interface**: Interactive web interface for querying NoSQL collections
+  - JSON-based query builder
+  - Collection browser
+  - Results display in table and JSON formats
+  - Query examples and documentation
+- **PostgreSQL Query Interface**: SQL query interface for relational data
+  - Safe SELECT-only query execution
+  - Table structure exploration
+  - Results display with column headers
+  - Sample query templates
+
 ## 🛠️ Technology Stack
 
-- **Backend**: Flask, Python 3.x
+- **Backend**: Flask (Web UI), FastAPI (REST API), Python 3.x
 - **Data Processing**: Pandas, NumPy
 - **Machine Learning**: scikit-learn, TensorFlow/PyTorch
 - **Visualization**: Matplotlib, Plotly
 - **Containerization**: Docker, docker-compose
-- **Database**: PostgreSQL (optional)
+- **Databases**: MongoDB, PostgreSQL
+- **Web Interface**: HTML5, CSS3, JavaScript
+- **API Framework**: FastAPI with automatic OpenAPI docs
 
 ## 📦 Installation
 
@@ -158,12 +182,18 @@ The Flask application provides the following routes:
 - `/feature-engineering` - Feature Lab: Available predictive features
 - `/training` - Model Training: ML model information
 - `/predictions` - Forecast Results: Future predictions interface
+- `/query-mongodb` - MongoDB Query Interface: Interactive NoSQL database queries
+- `/query-postgresql` - PostgreSQL Query Interface: Interactive SQL database queries
 
 ### Docker Setup
 
 ```bash
 docker-compose up -d
 ```
+
+Access the Docker-deployed services:
+- **Flask Web Application**: `http://localhost:58503`
+- **FastAPI Backend**: `http://localhost:8000` (with automatic API docs at `/docs`)
 
 ## 📈 Usage
 
@@ -215,24 +245,36 @@ model = train_lstm_model(
 ## 🚀 Current Status
 
 ### Application Status
-- ✅ **Flask App Running**: Successfully deployed on `http://localhost:18502`
-- ✅ **All Routes Accessible**: Home, Data Overview, Feature Engineering, Training, Predictions
+- ✅ **Flask Web App Running**: Successfully deployed on `http://localhost:18502` (local) and `http://localhost:58503` (Docker)
+- ✅ **FastAPI Backend Running**: REST API service on `http://localhost:8000` with automatic OpenAPI documentation
+- ✅ **All Routes Accessible**: Home, Data Overview, Feature Engineering, Training, Predictions, MongoDB Query, PostgreSQL Query
+- ✅ **API Endpoints Functional**: MongoDB and PostgreSQL programmatic access
 - ✅ **Real Data Integration**: Metrics calculated from actual CSV datasets
 - ✅ **Web Interface Functional**: Clean, responsive design with real-time statistics
+- ✅ **Database Query Interfaces**: Interactive MongoDB and PostgreSQL query pages
+- ✅ **Docker Containerization**: Full-stack deployment with database connectivity
 
 ### Recent Updates (November 22, 2025)
 - ✅ Complete transformation from Medical Image Synthesis to S&P 500 Prediction Platform
-- ✅ New Flask application with 5 functional pages
+- ✅ New Flask application with 7 functional pages (added MongoDB/PostgreSQL query interfaces)
+- ✅ FastAPI backend implementation with REST API endpoints for MongoDB and PostgreSQL
 - ✅ Integration of 3 datasets: S&P 500, Depression Index, Rainfall
 - ✅ Comprehensive documentation suite
 - ✅ Professional UI/UX with navigation and metrics cards
+- ✅ Docker containerization with proper database connectivity
+- ✅ Environment variable configuration for database connections
+- ✅ Interactive query interfaces for both MongoDB and PostgreSQL
 
 ### Tested Features
-- ✅ Home page with platform overview
+- ✅ Home page with platform overview and navigation cards
 - ✅ Data Overview page displaying S&P 500 statistics
 - ✅ Feature Engineering documentation
 - ✅ Model Training information
 - ✅ Predictions placeholder page
+- ✅ MongoDB Query Interface with collection browsing and JSON queries
+- ✅ PostgreSQL Query Interface with SQL SELECT execution
+- ✅ FastAPI REST API endpoints for MongoDB and PostgreSQL access
+- ✅ Docker deployment with database connectivity
 
 ## 🤝 Contributing
 
@@ -260,167 +302,12 @@ For questions or feedback, please open an issue on GitHub.
 
 ---
 
-# Quick Start Guide - S&P 500 Stock Prediction Platform
+## 🚀 Quick Start
 
-## 🚀 Get Started in 3 Steps
-
-### Step 1: Install Dependencies
-```bash
-cd flask
-pip install -r requirements.txt
-```
-
-### Step 2: Run the Application
-```bash
-python app.py
-```
-
-### Step 3: Open in Browser
-Navigate to: **http://localhost:18502**
+For a quick start guide, see [`QUICKSTART.md`](QUICKSTART.md).
 
 ---
 
-## 📁 Project Data
-
-The platform uses three main datasets located in `dataset/`:
-
-1. **sp500.csv** - S&P 500 historical market data (2014-2024)
-2. **depression_index.csv** - Google Trends sentiment data
-3. **rainfall.csv** - Environmental data for correlation analysis
-
----
-
-## 🎯 Main Features
-
-### 1. Home Dashboard
-- Platform overview
-- Key performance metrics
-- Quick navigation
-
-### 2. Data Overview
-Visit: `http://localhost:18502/data-overview`
-- S&P 500 statistics
-- Dataset summaries
-- Performance metrics
-
-### 3. Feature Engineering
-Visit: `http://localhost:18502/feature-engineering`
-- Technical indicators
-- Sentiment analysis
-- Environmental factors
-
-### 4. Model Training
-Visit: `http://localhost:18502/training`
-- LSTM models
-- Random Forest
-- XGBoost
-- Linear Regression
-
-### 5. Predictions
-Visit: `http://localhost:18502/predictions`
-- Price forecasting
-- Model metrics
-- Feature importance
-
----
-
-## 🛠️ Common Commands
-
-### Start the Server
-```bash
-python app.py
-```
-
-### Stop the Server
-Press `CTRL+C` in the terminal
-
-### Check if Server is Running
-```bash
-lsof -i :18502
-```
-
-### Install Missing Packages
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## 📊 Sample Workflow
-
-1. **Explore Data** → Visit Data Overview page
-2. **Analyze Features** → Check Feature Engineering lab
-3. **Train Models** → Go to Model Training console
-4. **View Predictions** → Check Predictions dashboard
-
----
-
-## ⚠️ Troubleshooting
-
-**Port already in use?**
-```bash
-# Find and kill the process
-lsof -i :18502
-kill -9 <PID>
-```
-
-**Dataset not found?**
-- Ensure `dataset/` folder exists in project root
-- Check file names: `sp500.csv`, `depression_index.csv`, `rainfall.csv`
-
-**Import errors?**
-```bash
-pip install -r requirements.txt --upgrade
-```
-
----
-
-## 📚 Learn More
-
-- Full documentation: See `README.md`
-- Flask app details: See `flask/README.md`
-- Project architecture: Check main `README.md`
-
----
-
-## 🎓 Educational Purpose
-
-This platform is built for educational purposes to demonstrate:
-- Data engineering pipelines
-- ETL processes
-- Machine learning workflows
-- Full-stack web development
-
-**Not for actual trading decisions!**
-
----
-
-## 💡 Quick Tips
-
-1. Start with the Data Overview page to understand the datasets
-2. Check Feature Engineering to see available predictive features
-3. Model Training page shows available ML algorithms
-4. Predictions page will show forecast results (coming soon)
-
----
-
-## 🤝 Need Help?
-
-- Check the full README.md for detailed documentation
-- Open a GitHub issue for bugs or questions
-- Contact the development team
-
----
-
-**Happy Predicting! 📈**
-
----
-
-**Last Updated**: November 22, 2025  
-**Status**: Active and Running  
-**Platform**: S&P 500 Stock Prediction & Analysis Platform
-
-**Note**: This is an educational project for demonstrating data engineering and machine learning concepts. Not intended for actual financial trading decisions.
 # 🎓 S&P 500 Stock Prediction Platform - Complete Guide
 
 ## 📚 Table of Contents
@@ -887,32 +774,45 @@ See `flask/README.md` → Troubleshooting section
 
 ---
 
-## 📝 Change Log
+## 📋 Change Log
+
+### Version 1.1 (November 22, 2025)
+- ✅ Added MongoDB Query Interface with interactive web forms
+- ✅ Added PostgreSQL Query Interface with SQL SELECT execution
+- ✅ Implemented FastAPI backend with REST API endpoints
+- ✅ Updated Flask app to use environment variables for database connections
+- ✅ Fixed Docker containerization with proper database connectivity
+- ✅ Added navigation cards for database query interfaces
+- ✅ Enhanced documentation with new features
 
 ### Version 1.0 (November 22, 2025)
-- ✅ Complete platform transformation
-- ✅ New Flask application
-- ✅ Real data integration
-- ✅ Comprehensive documentation
-- ✅ 5 functional pages
+- ✅ Complete platform transformation from Medical Image Synthesis to S&P 500 Prediction
+- ✅ New Flask application with 5 functional pages
+- ✅ Integration of 3 datasets: S&P 500, Depression Index, Rainfall
+- ✅ Comprehensive documentation suite
+- ✅ Professional UI/UX with navigation and metrics cards
 
 ---
 
 ## 🎉 Success Criteria
 
 ### You've Successfully Set Up When:
-- ✅ Application runs on port 18502
-- ✅ Home page displays correctly
-- ✅ All 5 pages are accessible
+- ✅ Flask web application runs on port 18502
+- ✅ FastAPI backend runs on port 8000
+- ✅ Home page displays correctly with navigation cards
+- ✅ All 7 pages are accessible (including query interfaces)
 - ✅ Real statistics show on Data Overview
+- ✅ MongoDB and PostgreSQL query interfaces work
+- ✅ Docker containers run successfully
 - ✅ No errors in terminal
 
 ### You Understand The Project When:
-- ✅ You know the 3 data sources
-- ✅ You can navigate all pages
-- ✅ You understand the ML models
-- ✅ You can explain the architecture
-- ✅ You can modify basic features
+- ✅ You know the 3 data sources and their purposes
+- ✅ You can navigate all web interface pages
+- ✅ You understand the ML models and their use cases
+- ✅ You can use the API endpoints for data access
+- ✅ You can explain the Flask + FastAPI architecture
+- ✅ You can modify basic features and styling
 
 ---
 
@@ -1572,13 +1472,26 @@ app.run(host='0.0.0.0', port=YOUR_PORT)
 Datasets are loaded from `../dataset/` relative to the Flask app directory.
 Modify in `load_datasets()` function if needed.
 
-## API Endpoints
+## Flask Web Interface Routes
 
 - `GET /` - Home page
 - `GET /data-overview` - Dataset statistics
 - `GET /feature-engineering` - Feature engineering lab
 - `GET /training` - Model training console
 - `GET /predictions` - Predictions dashboard
+- `GET /query-mongodb` - MongoDB query interface
+- `POST /query-mongodb` - Execute MongoDB queries
+- `GET /query-postgresql` - PostgreSQL query interface
+- `POST /query-postgresql` - Execute SQL SELECT queries
+
+## FastAPI Backend (Optional)
+
+The project also includes a separate FastAPI service for programmatic access:
+
+- **MongoDB API**: `http://localhost:8000/mongodb/*`
+- **PostgreSQL API**: `http://localhost:8000/postgresql/*`
+
+See `api/README.md` for detailed API documentation.
 
 ## Styling
 
@@ -1669,6 +1582,32 @@ pip install -r requirements.txt --force-reinstall
 - [ ] Database integration for historical predictions
 - [ ] Export functionality for reports
 
+## 📋 Change Log
+
+### Version 1.1 (November 22, 2025)
+- ✅ Added MongoDB Query Interface with interactive web forms
+- ✅ Added PostgreSQL Query Interface with SQL SELECT execution
+- ✅ Updated Flask app to use environment variables for database connections
+- ✅ Fixed Docker containerization with proper database connectivity
+- ✅ Added navigation cards for database query interfaces
+- ✅ Enhanced documentation with new features
+
+### Version 1.0 (November 22, 2025)
+- ✅ Complete platform transformation from Medical Image Synthesis to S&P 500 Prediction
+- ✅ New Flask application with 5 functional pages
+- ✅ Integration of 3 datasets: S&P 500, Depression Index, Rainfall
+- ✅ Comprehensive documentation suite
+- ✅ Professional UI/UX with navigation and metrics cards
+
 ## License
 
 MIT License - See project root LICENSE file
+
+---
+
+**Last Updated**: November 22, 2025  
+**Version**: 1.1  
+**Status**: Active Development with FastAPI Backend & Database Query Interfaces  
+**Platform**: S&P 500 Stock Prediction & Analysis
+
+**🎯 Key Features**: Flask Web UI, FastAPI REST API, 7 Web Pages, 3 Databases, Interactive Queries, Docker Deployment
