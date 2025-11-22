@@ -1,0 +1,29 @@
+(1) ccnews_depression.csv - this is raw text file . 
+the titles and first sentences were extracted
+
+(2) ccnews_depression_daily_count_final.csv 
+the titles and first sentences were extracted and counted "depression" as a daily basis.
+
+(3) depression_index.csv 
+this file contains the google trend api - counting words: how many times do people webserch the word - "depression"
+
+(4) company_info.csv
+it is dimensional file from wikipedia- sp 500 companies to get the ticker info.
+
+(5) sp500.csv
+sp500 companies' averaged closed price, volatility in 7 days, volume
+
+(6) rainfall.csv
+the amount of rain daily by states -> will be averaged bby daily basis
+
+(7) stock_data_wiki.csv
+combimed the ticker name and industries by wikipedia INFORMATION
+
+(8) merged_analysis_data.csv
+all tables are merged to prepare regression analysis
+
+
+This analysis will find three INSIGHTS
+1. Weather and depression index relationship - does it bring any insights to predict people's transactional behavior?
+2. Depression words exposure by news will affect the transaction behavior?
+3. By industries, are there any differences the relationship depression and the stock transaction behaviroe?

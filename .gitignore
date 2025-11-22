@@ -1,1 +1,3 @@
 dataset/stock_data.csv
+/spark-warehouse/mydb.db
+raw_data/stock_data.csv
